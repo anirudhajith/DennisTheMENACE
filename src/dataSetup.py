@@ -18,8 +18,6 @@ for s in range(0,3 ** 9):
     state = ((cells[0],cells[1],cells[2]), (cells[3],cells[4],cells[5]), (cells[6],cells[7],cells[8]))
     states.append(state)
 
-
-
 validStates = []
 
 for state in states:

@@ -1,3 +1,3 @@
 import json
 
-MENACE-weights = {}
+MENACE_weights = {}

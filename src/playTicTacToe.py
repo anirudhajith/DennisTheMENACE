@@ -1,33 +1,52 @@
-board = [
-    [' ', ' ', ' '],
-    [' ', ' ', ' '],
-    [' ', ' ', ' ']
-]
+from stateData import validStates
+from adjacencyData import adjacentStates
+from ast import literal_eval as make_tuple
+
+board = ((' ', ' ', ' '), (' ', ' ', ' '), (' ', ' ', ' '))
 
 stateSequence = [board]
 
 # currentPlayer stores the symbol corresponding to the current player's move
 currentPlayer = 'X'
 
+
 def checkNewBoardValidity(newBoard):
-    boardFlat = [cell for cell in row for row in board]
-    newBoardFlat = [cell for cell in row for row in newBoard]
+    return newBoard in adjacentStates[board]
 
-    flatBoards = zip(boardFlat, newBoardFlat)
-
-    differences = [positionValues for positionValues in flatBoards if positionValues[0] is not positionValues[1]]
-
-    if len(differences) == 1:
-        if differences[0][0] == ' ' and differences[0][1] == currentPlayer:
-            return True
-    
-    return False
 
 def updateBoard(newBoard):
     if checkNewBoardValidity(newBoard):
+        global board
         board = newBoard
         stateSequence.append(board)
+    else:
+        print("invalid move")
+
 
 def getBoardState():
     return board
 
+
+def printBoardState():
+    for row in range(3):
+        print('|', end='')
+        for col in range(3):
+            print(board[row][col], end='|')
+        print('')
+
+
+def isGameOver():
+    return False
+
+
+def play():
+    printBoardState()
+
+    while(not isGameOver()):
+        #row, col = [int(num) for num in input('').split(' ')]
+        newBoardState = make_tuple(input(''))
+        updateBoard(newBoardState)
+        printBoardState()
+
+
+play()
